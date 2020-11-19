@@ -29,31 +29,47 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo;
+    // protected $redirectTo;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+
     public function redirectTo()
     {
-        switch(Auth::user()->utype){
-            case 1:
-            $this->redirectTo = '/admin';
-            return $this->redirectTo;
-                break;
-            
-            case 2:
-                $this->redirectTo = '/moderator';
-                return $this->redirectTo;
-                break;
-            case 3:
-                    $this->redirectTo = '/user';
-                    return $this->redirectTo;
-                    break;
-         
-            default:
-                $this->redirectTo = '/login';
-                return $this->redirectTo;
+        if (auth()->user()->utype ===1) {
+            return '/admin/index';
+        } else if (auth()->user()->utype ===2) {
+            return '/moderator/index';
+        }else if (auth()->user()->utype ===3) {
+            return '/user/index';
+        }  
+        else {
+            return '/home';
         }
+    }
+
+    // public function redirectTo()
+    // {
+    //     switch(Auth::user()->utype){
+    //         case 1:
+    //         $this->redirectTo = '/admin';
+    //         return $this->redirectTo;
+    //             break;
+            
+    //         case 2:
+    //             $this->redirectTo = '/moderator';
+    //             return $this->redirectTo;
+    //             break;
+    //         case 3:
+    //                 $this->redirectTo = '/user';
+    //                 return $this->redirectTo;
+    //                 break;
          
-        // return $next($request);
-    } 
+    //         default:
+    //             $this->redirectTo = '/login';
+    //             return $this->redirectTo;
+    //     }
+         
+    //     // return $next($request);
+    // } 
     // = RouteServiceProvider::HOME;
 
     /**
